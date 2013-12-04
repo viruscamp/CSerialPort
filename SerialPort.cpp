@@ -18,7 +18,7 @@
 */
 
 #include "stdafx.h"
-#include "CSerialPort.h"
+#include "SerialPort.h"
 
 #include <assert.h>
  
