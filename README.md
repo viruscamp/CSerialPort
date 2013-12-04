@@ -18,4 +18,14 @@ http://blog.csdn.net/liquanhai/article/details/4955253
 
 
 by liquanhai on 2011-11-06
-* 增加 ReceiveChar 中防止线程死锁 
+http://blog.csdn.net/liquanhai/article/details/6941574
+* 增加 ReceiveChar 中防止线程死锁
+
+
+by viruscamp on 2013-12-04
+https://github.com/viruscamp/CSerialPort
+* 增加 IsOpen 判断是否打开
+* 修正 InitPort 中 parity Odd Even 参数取值错误
+* 修改 InitPort 中 portnr 取值范围，portnr>9 时特殊处理
+* 取消对 MFC 的依赖，使用 HWND 替代 CWnd，使用 win32 thread 函数而不是 MFC 的
+* 增加用户消息编号自定义，方法来自 CnComm
