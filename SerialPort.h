@@ -24,7 +24,7 @@
 **  author：liquanhai date:2011-11-04
 **  改进
 **    1）增加 ClosePort中交出控制权，防止死锁问题
-**
+**    2) 增加 ReceiveChar中防止线程死锁
 */
 
 #ifndef __SERIALPORT_H__

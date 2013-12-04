@@ -587,11 +587,11 @@ void CSerialPort::ReceiveChar(CSerialPort* port, COMSTAT comstat)
 
 	for (;;) 
 	{ 
-		//add by liquanhai  ·ÀÖ¹ËÀËø
-		if(WaitForSingleObject(port->m_hShutdownEvent,0)==WAIT_OBJECT_0)
-			return;
+             //add by liquanhai 2011-11-06  ·ÀÖ¹ËÀËø
+             if(WaitForSingleObject(port->m_hShutdownEvent,0)==WAIT_OBJECT_0)
+                 return;
 
-		// Gain ownership of the comm port critical section.
+                // Gain ownership of the comm port critical section.
 		// This process guarantees no other part of this program 
 		// is using the port object. 
 		
@@ -719,16 +719,17 @@ DWORD CSerialPort::GetWriteBufferSize()
 
 void CSerialPort::ClosePort()
 {
+	MSG message;
 	do
 	{
-	      SetEvent(m_hShutdownEvent);
-             if(::PeekMessage(&message,m_pOwner->m_hWnd,0,0,PM_REMOVE))
-              {
-              ::TranslateMessage(&message);
-               ::DispatchMessage(&message);
-             }
-               
-         } while (m_bThreadAlive);
+		SetEvent(m_hShutdownEvent);
+		if(::PeekMessage(&message,m_pOwner->m_hWnd,0,0,PM_REMOVE))
+		{
+			::TranslateMessage(&message);
+			::DispatchMessage(&message);
+		}
+
+	} while (m_bThreadAlive);
 
 	// if the port is still opened: close it 
 	if (m_hComm != NULL)
@@ -808,9 +809,7 @@ BOOL CSerialPort::RecvData(LPTSTR lpszData, const int nSize)
 	while (mylen<nSize) {
 		if(!ReadFile(m_hComm,lpszData,nSize,&mylen2,NULL)) 
 			return FALSE;
-		mylen += mylen2;
-
-		
+		mylen += mylen2;		
 	}
 	
 	return TRUE;
